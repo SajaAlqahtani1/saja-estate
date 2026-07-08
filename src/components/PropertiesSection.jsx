@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect , useMemo } from 'react'
 import PropertyCard from './PropertyCard'
 
 // API settings
@@ -75,6 +75,16 @@ function PropertiesSection({ isDark }) {
   const bgColor    = isDark ? '#0f1f0f' : '#f5f5f5'
   const titleColor = isDark ? '#C0DD97' : '#27500A'
   const subColor   = isDark ? '#888780' : '#5F5E5A'
+// Filter properties based on searchText
+  // useMemo remembers the result — only recalculates
+  // when properties or searchText changes
+  const filteredProperties = useMemo(() => {
+    return searchText.trim() === ''
+      ? properties
+      : properties.filter(property =>
+          property.name.toLowerCase().includes(searchText.toLowerCase())
+        )
+  }, [properties, searchText])
 
   return (
     <section style={{ backgroundColor: bgColor, padding: '60px 32px' }}>
