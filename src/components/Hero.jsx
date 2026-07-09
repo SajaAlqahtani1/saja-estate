@@ -1,17 +1,10 @@
-// Hero component receives isDark from App.jsx
-import { useState } from 'react'
-
-function Hero({ isDark }) {
-
-  // Remember what the user types in the search box
-  //console.log("hi test 1")
-  const [searchText, setSearchText] = useState('')
-
- // console.log("here")
+// Hero receives searchText and setSearchText from App.jsx
+// No more local useState for search
+function Hero({ isDark, searchText, setSearchText }) {
 
   // Colors based on theme
-  const bgColor      = isDark ? '#0f1f0f' : '#1a3a1a'
-  const subtitleColor = isDark ? '#97C459' : '#97C459'
+  const bgColor       = isDark ? '#0f1f0f' : '#1a3a1a'
+  const subtitleColor = '#97C459'
 
   return (
     <section style={{
@@ -37,7 +30,8 @@ function Hero({ isDark }) {
         gap: '0px',
         marginBottom: '60px'
       }}>
-        {/* Text input — updates searchText on every keystroke */}
+
+        {/* Text input — updates searchText in App.jsx */}
         <input
           type="text"
           placeholder="Search by city or property type..."
@@ -65,6 +59,7 @@ function Hero({ isDark }) {
         }}>
           Search
         </button>
+
       </div>
 
       {/* Stats row */}
@@ -76,19 +71,16 @@ function Hero({ isDark }) {
         paddingTop: '40px'
       }}>
 
-        {/* Stat 1 */}
         <div>
           <div style={{ color: '#97C459', fontSize: '32px', fontWeight: 'bold' }}>500+</div>
           <div style={{ color: '#ffffff', fontSize: '14px' }}>Properties</div>
         </div>
 
-        {/* Stat 2 */}
         <div>
           <div style={{ color: '#97C459', fontSize: '32px', fontWeight: 'bold' }}>12</div>
           <div style={{ color: '#ffffff', fontSize: '14px' }}>Cities</div>
         </div>
 
-        {/* Stat 3 */}
         <div>
           <div style={{ color: '#97C459', fontSize: '32px', fontWeight: 'bold' }}>98%</div>
           <div style={{ color: '#ffffff', fontSize: '14px' }}>Happy Clients</div>

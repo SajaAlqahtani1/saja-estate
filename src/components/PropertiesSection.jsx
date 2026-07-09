@@ -1,13 +1,14 @@
-import { useState, useEffect , useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import PropertyCard from './PropertyCard'
 
 // API settings
 const API_URL = 'http://localhost:8000'
 const TOKEN   = 'Saja'
 
-function PropertiesSection({ isDark }) {
+// searchText comes as prop from App.jsx now — no local state needed
+function PropertiesSection({ isDark, searchText }) {
 
-  // Real data from API — starts as empty array
+  // Real data from API - starts as empty array
   const [properties, setProperties]   = useState([])
 
   // True while waiting for data
@@ -16,7 +17,7 @@ function PropertiesSection({ isDark }) {
   // Holds error message if something goes wrong
   const [error, setError]             = useState(null)
 
-  // Current page number — starts at 1
+  // Current page number - starts at 1
   const [currentPage, setCurrentPage] = useState(1)
 
   // Total pages from API response
@@ -34,7 +35,6 @@ function PropertiesSection({ isDark }) {
       setLoading(true)
       setError(null)
 
-      // Send GET request with token and page number
       const response = await fetch(
         `${API_URL}/properties?page=${currentPage}&limit=6`,
         {
@@ -44,29 +44,17 @@ function PropertiesSection({ isDark }) {
         }
       )
 
-      //console.log("backend data: ", response)
-
-      // If response is not 200 OK, throw error
       if (!response.ok) {
         throw new Error('Failed to fetch properties')
-      } 
+      }
 
-      // Convert response to JavaScript object
       const data = await response.json()
-
-
-      // Update state with real data
       setProperties(data.properties)
-
-     // console.log("------------------", data.properties)
       setTotalPages(data.total_pages)
 
-       // console.log("SAJA test",data)
     } catch (err) {
-      // Save error message to show user
       setError(err.message)
     } finally {
-      // Always hide loading — success or fail
       setLoading(false)
     }
   }
@@ -75,7 +63,8 @@ function PropertiesSection({ isDark }) {
   const bgColor    = isDark ? '#0f1f0f' : '#f5f5f5'
   const titleColor = isDark ? '#C0DD97' : '#27500A'
   const subColor   = isDark ? '#888780' : '#5F5E5A'
-// Filter properties based on searchText
+
+  // Filter properties based on searchText from Hero
   // useMemo remembers the result — only recalculates
   // when properties or searchText changes
   const filteredProperties = useMemo(() => {
@@ -99,15 +88,17 @@ function PropertiesSection({ isDark }) {
         Featured Properties
       </h2>
 
-      {/* Page info */}
-      <p style={{
-        color: subColor,
-        textAlign: 'center',
-        marginBottom: '40px',
-        fontSize: '14px'
-      }}>
-        Page {currentPage} of {totalPages}
-      </p>
+      {/* Page info — only show when not searching */}
+      {searchText.trim() === '' && (
+        <p style={{
+          color: subColor,
+          textAlign: 'center',
+          marginBottom: '40px',
+          fontSize: '14px'
+        }}>
+          Page {currentPage} of {totalPages}
+        </p>
+      )}
 
       {/* Loading message */}
       {loading && (
@@ -131,8 +122,20 @@ function PropertiesSection({ isDark }) {
         </p>
       )}
 
-      {/* Property cards — only show when not loading and no error */}
-      {!loading && !error && (
+      {/* No results message */}
+      {!loading && !error && filteredProperties.length === 0 && (
+        <p style={{
+          color: subColor,
+          textAlign: 'center',
+          fontSize: '16px',
+          marginTop: '20px'
+        }}>
+          No properties found for "{searchText}"
+        </p>
+      )}
+
+      {/* Property cards — uses filteredProperties */}
+      {!loading && !error && filteredProperties.length > 0 && (
         <div style={{
           display: 'flex',
           justifyContent: 'center',
@@ -140,7 +143,7 @@ function PropertiesSection({ isDark }) {
           flexWrap: 'wrap',
           marginBottom: '40px'
         }}>
-          {properties.map((property) => (
+          {filteredProperties.map((property) => (
             <PropertyCard
               key={property.id}
               property={property}
@@ -150,8 +153,8 @@ function PropertiesSection({ isDark }) {
         </div>
       )}
 
-      {/* Pagination buttons */}
-      {!loading && !error && (
+      {/* Pagination — hidden while searching */}
+      {!loading && !error && searchText.trim() === '' && (
         <div style={{
           display: 'flex',
           justifyContent: 'center',
@@ -160,7 +163,6 @@ function PropertiesSection({ isDark }) {
           marginTop: '20px'
         }}>
 
-          {/* Previous page button */}
           <button
             onClick={() => setCurrentPage(currentPage - 1)}
             disabled={currentPage === 1}
@@ -177,7 +179,6 @@ function PropertiesSection({ isDark }) {
             Previous
           </button>
 
-          {/* Current page indicator */}
           <span style={{
             color: titleColor,
             padding: '10px 16px',
@@ -187,7 +188,6 @@ function PropertiesSection({ isDark }) {
             {currentPage} / {totalPages}
           </span>
 
-          {/* Next page button */}
           <button
             onClick={() => setCurrentPage(currentPage + 1)}
             disabled={currentPage === totalPages}

@@ -10,6 +10,9 @@ function App() {
     return localStorage.getItem('theme') === 'dark'
   })
 
+  // searchText lives here so both Hero and PropertiesSection can use it
+  const [searchText, setSearchText] = useState('')
+
   function toggleTheme() {
     setIsDark(!isDark)
   }
@@ -21,10 +24,11 @@ function App() {
   return (
     <div style={{ minHeight: '100vh', backgroundColor: isDark ? '#0f1f0f' : '#f5f5f5' }}>
       <Navbar isDark={isDark} toggleTheme={toggleTheme} />
-      <Hero isDark={isDark} />
-      <PropertiesSection isDark={isDark} />
+      {/* Pass searchText and setSearchText to Hero */}
+      <Hero isDark={isDark} searchText={searchText} setSearchText={setSearchText} />
+      {/* Pass searchText to PropertiesSection */}
+      <PropertiesSection isDark={isDark} searchText={searchText} />
       <Contact isDark={isDark} />
-      {/* Footer at the very bottom */}
       <Footer isDark={isDark} />
     </div>
   )
