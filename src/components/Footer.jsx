@@ -1,49 +1,26 @@
-function Footer({ isDark }) {
-
-  // Colors based on theme
-  const bgColor      = isDark ? '#050f05' : '#1a3a1a'
-  const headingColor = '#97C459'
-  const textColor    = '#888780'
-  const linkColor    = '#C0DD97'
-  const logoColor    = isDark ? '#97C459' : '#97C459'
+function Footer() {
 
   return (
-    <footer style={{
-      backgroundColor: bgColor,
-      padding: '48px 32px 0px 32px'
-    }}>
+    <footer className="pt-12 px-8 pb-0 bg-[#1a3a1a] dark:bg-[#050f05]">
 
       {/* Top row — 3 columns */}
-      <div style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
-        gap: '40px',
-        marginBottom: '40px'
-      }}>
+      <div className="flex justify-between flex-wrap gap-10 mb-10">
 
         {/* Column 1 — Logo and tagline */}
-        <div style={{ maxWidth: '240px' }}>
+        <div className="max-w-[240px]">
 
           {/* Logo */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
-            <div style={{
-              backgroundColor: logoColor,
-              color: '#173404',
-              padding: '6px 12px',
-              borderRadius: '6px',
-              fontWeight: 'bold',
-              fontSize: '16px'
-            }}>
+          <div className="flex items-center gap-2.5 mb-3">
+            <div className="bg-[#97C459] text-[#173404] px-3 py-1.5 rounded-md font-bold text-base">
               S
             </div>
-            <span style={{ color: '#C0DD97', fontWeight: 'bold', fontSize: '18px' }}>
+            <span className="text-[#C0DD97] font-bold text-lg">
               Saja Estate
             </span>
           </div>
 
           {/* Tagline */}
-          <p style={{ color: textColor, fontSize: '13px', lineHeight: '1.6', margin: 0 }}>
+          <p className="text-[#888780] text-[13px] leading-relaxed m-0">
             Your trusted real estate partner in Saudi Arabia. Finding your dream home is our mission.
           </p>
 
@@ -51,20 +28,20 @@ function Footer({ isDark }) {
 
         {/* Column 2 — Quick links */}
         <div>
-          <h4 style={{ color: headingColor, marginBottom: '16px', fontSize: '14px' }}>
+          <h4 className="text-[#97C459] mb-4 text-sm">
             Quick Links
           </h4>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <a href="#" style={{ color: linkColor, textDecoration: 'none', fontSize: '13px' }}>
+          <div className="flex flex-col gap-2.5">
+            <a href="#" className="text-[#C0DD97] no-underline text-[13px]">
               Home
             </a>
-            <a href="#" style={{ color: linkColor, textDecoration: 'none', fontSize: '13px' }}>
+            <a href="#" className="text-[#C0DD97] no-underline text-[13px]">
               Properties
             </a>
-            <a href="#" style={{ color: linkColor, textDecoration: 'none', fontSize: '13px' }}>
+            <a href="#" className="text-[#C0DD97] no-underline text-[13px]">
               About Us
             </a>
-            <a href="#contact" style={{ color: linkColor, textDecoration: 'none', fontSize: '13px' }}>
+            <a href="#contact" className="text-[#C0DD97] no-underline text-[13px]">
               Contact
             </a>
           </div>
@@ -72,17 +49,17 @@ function Footer({ isDark }) {
 
         {/* Column 3 — Contact info */}
         <div>
-          <h4 style={{ color: headingColor, marginBottom: '16px', fontSize: '14px' }}>
+          <h4 className="text-[#97C459] mb-4 text-sm">
             Contact Us
           </h4>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <span style={{ color: textColor, fontSize: '13px' }}>
+          <div className="flex flex-col gap-2.5">
+            <span className="text-[#888780] text-[13px]">
               +966 50 000 0000
             </span>
-            <span style={{ color: textColor, fontSize: '13px' }}>
+            <span className="text-[#888780] text-[13px]">
               info@sajaestate.com
             </span>
-            <span style={{ color: textColor, fontSize: '13px' }}>
+            <span className="text-[#888780] text-[13px]">
               Riyadh, Saudi Arabia
             </span>
           </div>
@@ -90,20 +67,20 @@ function Footer({ isDark }) {
 
         {/* Column 4 — Working hours */}
         <div>
-          <h4 style={{ color: headingColor, marginBottom: '16px', fontSize: '14px' }}>
+          <h4 className="text-[#97C459] mb-4 text-sm">
             Working Hours
           </h4>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <span style={{ color: textColor, fontSize: '13px' }}>
+          <div className="flex flex-col gap-2.5">
+            <span className="text-[#888780] text-[13px]">
               Sunday - Thursday
             </span>
-            <span style={{ color: '#C0DD97', fontSize: '13px', fontWeight: 'bold' }}>
+            <span className="text-[#C0DD97] text-[13px] font-bold">
               9:00 AM - 6:00 PM
             </span>
-            <span style={{ color: textColor, fontSize: '13px' }}>
+            <span className="text-[#888780] text-[13px]">
               Friday - Saturday
             </span>
-            <span style={{ color: textColor, fontSize: '13px' }}>
+            <span className="text-[#888780] text-[13px]">
               Closed
             </span>
           </div>
@@ -112,24 +89,15 @@ function Footer({ isDark }) {
       </div>
 
       {/* Divider line */}
-      <div style={{
-        borderTop: '1px solid #3B6D11',
-        paddingTop: '20px',
-        paddingBottom: '20px',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-        gap: '12px'
-      }}>
+      <div className="border-t border-[#3B6D11] pt-5 pb-5 flex justify-between items-center flex-wrap gap-3">
 
         {/* Copyright */}
-        <span style={{ color: textColor, fontSize: '12px' }}>
+        <span className="text-[#888780] text-xs">
           2025 Saja Estate. All rights reserved.
         </span>
 
         {/* Right side note */}
-        <span style={{ color: textColor, fontSize: '12px' }}>
+        <span className="text-[#888780] text-xs">
           Built with React and FastAPI
         </span>
 

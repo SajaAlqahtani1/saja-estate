@@ -1,60 +1,31 @@
 // Navbar receives isDark and toggleTheme from App.jsx
 function Navbar({ isDark, toggleTheme }) {
 
- 
-
-  const bgColor   = isDark ? '#1a2e1a' : '#ffffff'
-  const textColor = isDark ? '#C0DD97' : '#27500A'
-  const logoColor = isDark ? '#97C459' : '#3B6D11'
-
   return (
-    <nav style={{
-      backgroundColor: bgColor,
-      padding: '16px 32px',
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      borderBottom: '2px solid #3B6D11'
-    }}>
+    <nav className="px-8 py-4 flex justify-between items-center border-b-2 border-[#3B6D11] bg-white dark:bg-[#1a2e1a]">
 
       {/* Logo */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-        <div style={{
-          backgroundColor: logoColor,
-          color: 'white',
-          padding: '6px 12px',
-          borderRadius: '6px',
-          fontWeight: 'bold',
-          fontSize: '18px'
-        }}>
+      <div className="flex items-center gap-2.5">
+        <div className="text-white px-3 py-1.5 rounded-md font-bold text-lg bg-[#3B6D11] dark:bg-[#97C459]">
           S
         </div>
-        <span style={{ color: textColor, fontWeight: 'bold', fontSize: '20px', whiteSpace: 'nowrap' }}>
+        <span className="font-bold text-xl whitespace-nowrap text-[#27500A] dark:text-[#C0DD97]">
           Saja Estate
         </span>
       </div>
 
       {/* Nav links */}
-      <div style={{ display: 'flex', gap: '32px' }}>
-        <a href="#" style={{ color: textColor, textDecoration: 'none' }}>Home</a>
-        <a href="#" style={{ color: textColor, textDecoration: 'none' }}>Properties</a>
-        <a href="#" style={{ color: textColor, textDecoration: 'none' }}>About</a>
-        <a href="#contact" style={{ color: textColor, textDecoration: 'none' }}>Contact</a>
+      <div className="flex gap-8">
+        <a href="#" className="no-underline text-[#27500A] dark:text-[#C0DD97]">Home</a>
+        <a href="#" className="no-underline text-[#27500A] dark:text-[#C0DD97]">Properties</a>
+        <a href="#" className="no-underline text-[#27500A] dark:text-[#C0DD97]">About</a>
+        <a href="#contact" className="no-underline text-[#27500A] dark:text-[#C0DD97]">Contact</a>
       </div>
 
       {/* Theme button — calls toggleTheme from App.jsx */}
       <button
         onClick={toggleTheme}
-        style={{
-          backgroundColor: logoColor,
-          color: 'white',
-          border: 'none',
-          padding: '8px 16px',
-          borderRadius: '6px',
-          cursor: 'pointer',
-          fontSize: '14px',
-          whiteSpace: 'nowrap'
-        }}
+        className="text-white border-none px-4 py-2 rounded-md cursor-pointer text-sm whitespace-nowrap bg-[#3B6D11] dark:bg-[#97C459]"
       >
         {isDark ? ' Light' : ' Dark'}
       </button>
