@@ -10,22 +10,29 @@ function App() {
     return localStorage.getItem('theme') === 'dark'
   })
 
+  const [searchText, setSearchText] = useState('')
+
   function toggleTheme() {
     setIsDark(!isDark)
   }
 
+  // Remembers the choice — saves to localStorage
   useEffect(() => {
     localStorage.setItem('theme', isDark ? 'dark' : 'light')
   }, [isDark])
 
+  // Applies it visually — toggles the "dark" class on <html>
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', isDark)
+  }, [isDark])
+
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: isDark ? '#0f1f0f' : '#f5f5f5' }}>
+    <div className="min-h-screen bg-[#f5f5f5] dark:bg-[#0f1f0f]">
       <Navbar isDark={isDark} toggleTheme={toggleTheme} />
-      <Hero isDark={isDark} />
-      <PropertiesSection isDark={isDark} />
-      <Contact isDark={isDark} />
-      {/* Footer at the very bottom */}
-      <Footer isDark={isDark} />
+      <Hero searchText={searchText} setSearchText={setSearchText} />
+      <PropertiesSection searchText={searchText} />
+      <Contact />
+      <Footer />
     </div>
   )
 }
